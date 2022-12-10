@@ -1,0 +1,32 @@
+#w = np.random.randint(1, 5, size=(4, 4))
+
+here x is large numbers, not 1 and 3 like in lecture,
+so when I multiply np.dot(wh, x), it gives values like this:
+s = 
+ [  511.17673772  -331.94241278  1763.18885739  3157.20388366
+  -525.28395301 -1126.39962718  -257.22565133 -1491.80481025
+   387.14005239  1711.94677805]
+
+when I send these values to sigmoid, it will give 0(if s[i] is +ve) or 1(if s[i] is -ve) only,
+ah = 
+ [1.00000000e+000 6.90624243e-145 1.00000000e+000 1.00000000e+000
+ 7.44865354e-229 6.46930309e-490 1.94231214e-112 1.31039683e-648
+ 1.00000000e+000 1.00000000e+000]
+therefore the error of h is always 0, as 
+err_h = np.dot(err_o, wo) * ah * (1 - ah) so 
+when ah is 1 (1 - ah) is 0 and err_h is 0, and when ah is 0 err_h is 0, so it's always 0
+
+you will notice that when s[i] is +ve, ah[i] is 1,
+and when s[i] is -ve, ah[i] is 0, this is because we pass s[i] to sigmoid fn in the power. 
+
+
+so to avoid this, we need to normalize
+to normalize array, use the way like in assignment
+Divide it by its norm
+z = arr/np.linalg.norm(arr)
+source(https://www.kite.com/python/answers/how-to-normalize-an-array-in-numpy-in-python)
+source(https://stackoverflow.com/questions/23017257/normalize-an-array-to-standard-normal-distribution/47973348)
+
+
+//another way to save
+np.savez(weightsFile, wh, wo)
